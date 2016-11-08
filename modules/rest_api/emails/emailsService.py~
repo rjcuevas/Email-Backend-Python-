@@ -1,0 +1,27 @@
+from modules.rest_api.emails.emailsModel import EmailsModel
+from modules.rest_api.emails import emailsModel
+
+class EmailsService:
+
+    def create_emails(self, email):
+        emails = EmailsModel()
+        emails.subject = email.get("subject")
+        emails.body = email.get("body")
+        emails.recipients = email.get("recipients")
+        emails.put()
+
+    def get_emails(self):
+        emails = EmailsModel()
+        list = emails.query_emails_list()
+        emails = []
+        for email in list:
+            print email
+            print
+            emails.append({"urlsafe": email.key().urlsafe(), "subject": email.subject, "body": email.body, "recipients": email.recipients})
+        data = dict(data=emails)
+        return data
+
+    def delete_emails(self):
+        emails = EmailsModel()
+        list_of_entities = [emailsModel.EmailsModel(subject='asd')]
+        emails.deleteList(list_of_entities)

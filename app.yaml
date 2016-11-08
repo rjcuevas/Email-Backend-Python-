@@ -1,0 +1,23 @@
+module: backend
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+- url: /.*
+  script: app.app
+
+builtins:
+- deferred: on
+- appstats: on
+
+skip_files:
+- ^(.*/)?#.*#$
+- ^(.*/)?.*~$
+- ^(.*/)?.*\.py[co]$
+- ^(.*/)?.*/RCS/.*$
+- ^(.*/)?\..*$
+
+# libraries:
+# - name: oauth2client
+#   version: "2.2.0"
